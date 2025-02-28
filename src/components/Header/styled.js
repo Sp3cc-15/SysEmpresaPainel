@@ -4,15 +4,15 @@ const Header = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0B847A;
+    background-color: grey;
     padding: 10px 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-bottom: 2px solid #dee2e6;
 
     button {
         background-color: #fff;
-        color: #0B847A;
-        border: 2px solid #0B847A;
+        color: #6f6b6b;
+        border: 2px solid #6f6b6b;
         padding: 10px 15px;
         border-radius: 5px;
         cursor: pointer;
@@ -20,16 +20,17 @@ const Header = styled.header`
         transition: background-color 0.3s;
 
         &:hover {
-            background-color: #0f776e;
+            background-color: #6f6b6b;
             color: #fff;
         }
     }
 
     a {
+        /* max-width: 10px; */
         background-color: #dc3545;
         color: #fff;
         border: none;
-        padding: 10px 15px;
+        padding: 5px 10px;
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;

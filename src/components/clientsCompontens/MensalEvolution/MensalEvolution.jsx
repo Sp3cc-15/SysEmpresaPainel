@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Chart, Series, ArgumentAxis, ValueAxis, Title, Legend, Size, Tooltip, Export, CommonSeriesSettings } from 'devextreme-react/chart';
+import { DataGrid, Column, HeaderFilter, Export as DataGridExport } from 'devextreme-react/data-grid';
 import { DivModal } from './styled';
+import 'devextreme/dist/css/dx.light.css'; // Certifique-se de importar o tema CSS do DevExtreme
 
 const customerData = [
   { month: 'Março', year: 2023, customers: 50 },
@@ -20,12 +22,16 @@ const customerData = [
 ];
 
 const CustomerChart = () => {
-  const customerData2023 = customerData.filter(data => data.year === 2023);
-  const customerData2024 = customerData.filter(data => data.year === 2024);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDataGridOpen, setIsDataGridOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
+    setIsDataGridOpen(false); // Fecha o DataGrid ao fechar o modal
+  };
+
+  const toggleDataGrid = () => {
+    setIsDataGridOpen(!isDataGridOpen);
   };
 
   return (
@@ -35,63 +41,93 @@ const CustomerChart = () => {
         padding: '10px',
         fontSize: '16px',
         color: '#fff',
-        backgroundColor: '#007bff',
+        backgroundColor: 'grey',
         border: 'none',
         borderRadius: '5px',
         cursor: 'pointer',
         transition: 'background-color 0.3s ease',
         marginBottom: '10px'
       }} 
-      onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0056b3'}
-      onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007bff'}
+      onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#6f6b6b'}
+      onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'grey'}
       onClick={toggleModal}>Novos Clientes por Mês</button>
       
       <DivModal onClick={toggleModal} isModalOpen={isModalOpen}>
         <div onClick={(e) => e.stopPropagation()} className='modalContent'>
-          <Chart
-            style={{ width: '100%', height: '100%' }}
-            dataSource={customerData}
-          >
-            <Size width="100%" height="100%" />
-            <ArgumentAxis
-              valueMarginsEnabled={false}
-            >
-              <Title text="Meses" />
-            </ArgumentAxis>
-            <ValueAxis
-              title="Novos Clientes"
-            />
-            <Title text="Evolução dos Novos Clientes por Mês" />
-            <CommonSeriesSettings
-              argumentField="month"
-              type="stackedLine"
-            />
-            <Series
-              valueField="customers"
-              name="2023"
-              color="#ff6666"
-              filterField="year"
-              filterValue={2023}
-            />
-            <Series
-              valueField="customers"
-              name="2024"
-              color="#6666ff"
-              filterField="year"
-              filterValue={2024}
-            />
-            <Legend verticalAlignment="bottom" horizontalAlignment="center" />
-            <Tooltip
-              enabled={true}
-              customizeTooltip={(pointInfo) => {
-                const { month, year, customers } = pointInfo.point.data;
-                return {
-                  text: `${month}, ${year}: ${customers.toLocaleString()} novos clientes`
-                };
+          {!isDataGridOpen ? (
+            <>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                <h2>Evolução dos Novos Clientes por Mês</h2>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button style={{
+                    padding: '6px 12px',
+                    fontSize: '14px',
+                    color: '#007bff',
+                    backgroundColor: 'white',
+                    border: '1px solid #007bff',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f0f0f0'}
+                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}
+                  onClick={toggleDataGrid}>Dados</button>
+                </div>
+              </div>
+              <Chart
+                style={{ width: '100%', height: '100%' }}
+                dataSource={customerData}
+              >
+                <Size width="100%" height="100%" />
+                <ArgumentAxis valueMarginsEnabled={false}>
+                  <Title text="Meses" />
+                </ArgumentAxis>
+                <ValueAxis title="Novos Clientes" />
+                <CommonSeriesSettings argumentField="month" type="stackedLine" />
+                <Series valueField="customers" name="2023" color="#ff6666" />
+                <Series valueField="customers" name="2024" color="#6666ff" />
+                <Legend verticalAlignment="bottom" horizontalAlignment="center" />
+                <Tooltip
+                  enabled={true}
+                  customizeTooltip={(pointInfo) => {
+                    const { month, year, customers } = pointInfo.point.data;
+                    return { text: `${month}, ${year}: ${customers.toLocaleString()} novos clientes` };
+                  }}
+                />
+                <Export enabled={true} formats={['PNG', 'JPEG', 'PDF', 'SVG', 'PRINT']} />
+              </Chart>
+            </>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+              <button style={{
+                marginBottom: '10px',
+                padding: '6px 12px',
+                fontSize: '14px',
+                color: '#007bff',
+                backgroundColor: 'white',
+                border: '1px solid #007bff',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                transition: 'background-color 0.3s ease'
               }}
-            />
-            <Export enabled={true} />
-          </Chart>
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f0f0f0'}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}
+              onClick={toggleDataGrid}>Voltar ao Gráfico</button>
+              <DataGrid
+                dataSource={customerData}
+                showBorders={true}
+                rowAlternationEnabled={true}
+                columnAutoWidth={true}
+                style={{ width: '100%', height: 'calc(100vh - 200px)' }}
+              >
+                <HeaderFilter visible={true} />
+                <Column dataField="month" caption="Mês" />
+                <Column dataField="year" caption="Ano" />
+                <Column dataField="customers" caption="Novos Clientes" />
+                <DataGridExport enabled={true} />
+              </DataGrid>
+            </div>
+          )}
         </div>
       </DivModal>
     </div>

@@ -10,7 +10,7 @@ export const DivModal = styled.div`
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
-
+  z-index: 1;
   .modalContent {
     background-color: white;
     width: 90%; /* Ajustado para 90% da largura da viewport */

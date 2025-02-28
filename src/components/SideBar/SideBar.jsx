@@ -37,7 +37,7 @@ export const SideBar = ({ isOpen, toggle }) => {
                     <Submenu isOpenMenu={isOpenMenu}>
                         <li onClick={()=> handleNavigate('/vendas')} className="menu-item">Vendas</li>
                         <li onClick={()=> handleNavigate('/clientes')} className="menu-item">Clientes</li>
-                        <li className="menu-item">Fluxo de Caixa</li>
+                        <li onClick={()=> handleNavigate('/fluxocaixa')} className="menu-item">Fluxo de Caixa</li>
                         <li className="menu-item">A Receber</li>
                         <li className="menu-item">A Pagar</li>
                     </Submenu>

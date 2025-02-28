@@ -20,9 +20,9 @@ export const HeaderMain = ()=>{
     return (
         <div>
             <Header>
-                <button onClick={toggleSideBar}>Menu Button</button>
-                <Link onClick={logout} to="/login" >Logout</Link>
-                <button>Maximizate</button>
+                <button onClick={toggleSideBar}>Menu</button>
+                <button onClick={logout} to="/login">Sair</button>
+        
             </Header>
             <SideBar isOpen={sideBar} toggle={toggleSideBar} />
         </div>

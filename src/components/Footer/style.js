@@ -6,11 +6,11 @@ export const FooterStyle = styled.footer`
   padding: 1rem;
   display: flex;
   justify-content: space-between;
-  position: relative;
+  position: fixed;
   bottom: 0;
-  transform: translateY(100%);
-  transition: transform 0.3s ease-in-out;
-  z-index: -1;
+  /* transform: translateY(100%); */
+  /* transition: transform 0.3s ease-in-out; */
+  z-index: 0;
 
 
   &.show {

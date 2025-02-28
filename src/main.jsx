@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './routes/LoginPage/Login.jsx'
 import Clientes from './routes/clientesDashboard/ClientesDashboard.jsx'
 import VendasDashboard from './routes/VendasDashboard/VendasDashboard.jsx'
+import FluxoCaixaDashboard from './routes/fluxoCaixaDashboard/FluxoCaixaDashboard.jsx'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     children: [
       { path: "vendas", element: <VendasDashboard /> },
       { path: "clientes", element: <Clientes /> },
+      { path: "fluxoCaixa", element: <FluxoCaixaDashboard /> },
     ],
   },
   { path: "/login", element: <Login /> }

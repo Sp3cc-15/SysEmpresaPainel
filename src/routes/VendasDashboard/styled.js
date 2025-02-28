@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const GraphicsContent = styled.div`
+padding-top: 3rem;
   max-width: 70%;
   display: flex;
   flex-direction: column;

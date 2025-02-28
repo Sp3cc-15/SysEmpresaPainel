@@ -13,6 +13,7 @@ const SidebarContainer = styled.div`
     flex-direction: column;
     padding: 1rem;
     color: white;
+    
 
     li{
         cursor: pointer;

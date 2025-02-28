@@ -1,5 +1,5 @@
 import { FirstSectionClientes } from "../../components/MainDashboardClientes/MainDashBoardClientes"
-import { GraphicsContent } from "../VendasDashboard/styled.js";
+import { GraphicsContent } from "./styled.js";
 import CustomerChart from "../../components/clientsCompontens/MensalEvolution/MensalEvolution.jsx"
 import ClientsByCityChart from "../../components/clientsCompontens/ClientsByCity/ClientsByCity.jsx"
 import ClientsByStateChart from "../../components/clientsCompontens/ClientsByState/ClientsByState.jsx"
@@ -20,7 +20,7 @@ const ClientsDashboard = ()=>{
                 <ClientsByStateChart/>
                 <ClientsByCategoryChart/>
                 <ClientsByNeighborhoodChart/>
-                <FinanceChart/>
+                {/* <FinanceChart/> */}
 
 
             </GraphicsContent>

@@ -1,3 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
-const url = "https://auth.sysempresa.com.br"
+const api = axios.create({
+  baseURL: 'https://testeapi.sysempresa.com.br/',
+});
+
+export default api;

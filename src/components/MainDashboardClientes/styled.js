@@ -52,21 +52,21 @@ const MainSection = styled.main`
                 padding: 10px 20px;
                 font-size: 1rem;
                 color: white;
-                background-color: #007bff;
+                background-color: grey;
                 border: none;
                 border-radius: 5px;
                 cursor: pointer;
                 transition: background-color 0.3s ease;
 
                 &:hover {
-                    background-color: #0056b3;
+                    background-color: #6f6b6b;
                 }
             }
         }
 
         span {
             display: block;
-            background-color: #F8D7DA;
+            background-color: rgb(199 133 88 / 63%);;
             color: black;
             padding: 10px;
             border-radius: 5px;
